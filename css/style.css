@@ -1,0 +1,31 @@
+#outer {
+    padding-left: 10%;
+    padding-right: 10%;
+    overflow: none;
+}
+#outer::before {
+    display: block;
+    content: "";
+    height: 10%;
+}
+#outer::after {
+    display: block;
+    content: "";
+    height: 10%;
+}
+#inner {
+    height: 80%;
+}
+
+html, body { height: 100%; }
+#outer {
+    width: 80%;
+    height: 80%;
+}
+#inner {
+    background-color: aliceblue;
+}
+#Guestbook {
+    height: 75%;
+    overflow: auto;
+}

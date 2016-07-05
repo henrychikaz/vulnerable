@@ -1,0 +1,10 @@
+<h2>Guestbook</h2>
+<ul class="w3-ul">
+  <% session[:state].reverse.each do |record| %>
+    <li>
+      <%= record[:feedback] %>
+      <br/>
+      <div class="w3-small"> <b>- <%= record[:name] %> on <%= record[:created_at].strftime("%d %b %Y") %></b></div>
+    </li>
+  <% end %>
+</ul>
