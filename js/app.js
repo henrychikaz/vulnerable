@@ -21,10 +21,18 @@ $("#add_feedback").on("click", function() {
 function refreshData() {
     window.location.href="/";
 }
-openTab("Guestbook");
+
+function updateSettings(settings_type, settings_value) {
+    $("#xss_settings_form").submit();
+}
+var tabName = window.location.hash.substr(1);
+if (tabName == "")
+    tabName = "Guestbook";
+openTab(tabName);
 $('#flash').delay(2000).fadeOut('slow');
 
 $("#guestbook_tab").on("click", function() {openTab("Guestbook")});
 $("#feedback_tab").on("click", function() {openTab("Feedback")});
 $("#settings_tab").on("click", function() {openTab("Settings")});
 
+$("#xss_level").on("change", function() {updateSettings("xss", $(this).val())});

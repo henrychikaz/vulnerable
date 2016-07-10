@@ -26,14 +26,24 @@ class MyApp < Sinatra::Base
 
   get '/' do
     session[:state] ||= []
+    session[:xss_settings] ||= ""
     #headers "Content-Security-Policy" => "default-src 'self' http://www.w3schools.com;"
     erb :index
   end
 
   post "/add_feedback" do
     session[:state] << {:name => params["name"], :feedback => params["feedback"], :created_at => Time.now}
-    flash.next[:message] = "Thanks for the feedback"
-    redirect to("/")
+    flash.next[:message] = "Thanks for the feedback!"
+    redirect to("/#Guestbook")
+  end
+
+  post "/update_settings" do
+    if params["type"] == "xss"
+      session[:xss_settings] = params["value"]
+    end
+
+    flash.next[:message] = "Settings updated successfully!"
+    redirect to("/#Settings")
   end
 
   session_pool = Rack::Session::Pool.new(
