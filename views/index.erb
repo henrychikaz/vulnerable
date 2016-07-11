@@ -15,10 +15,15 @@
 		</ul>
 
 		<% if flash[:message] %>
-			<div id=flash class="w3-container w3-green">
-				<h3>Success!</h3>
-				<p>Thanks for the feedback</p>
+			<div id=flash class="w3-container w3-green w3-round">
+				<p><%= flash[:message]%></p>
 			</div>
+		<% end %>
+
+		<% if flash[:error] %>
+				<div id=flash class="w3-container w3-red w3-round">
+					<p><%= flash[:error]%></p>
+				</div>
 		<% end %>
 
 		<div id="Guestbook" class="w3-container tab">

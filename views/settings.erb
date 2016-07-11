@@ -1,6 +1,10 @@
 <h2>Settings</h2>
 <h4>XSS Protection Level</h4>
 <form id=xss_settings_form class="w3-container" method="post" action="/update_settings">
-  <%= select_tag("xss_level", "value", [["no_protection","No Protection"], ["csp", "CSP"]], session[:xss_settings]) %>
+  <%= select_tag("xss_level", "value", [
+      ["no_protection","No Protection"],
+      ["disallow_script_tag", "Disallow Script Tag"],
+      ["csp", "CSP"]
+  ], session[:xss_settings]) %>
   <input name="type" value="xss" type="hidden"/>
 </form>

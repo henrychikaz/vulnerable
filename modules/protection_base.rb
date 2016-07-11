@@ -3,12 +3,23 @@ Dir[File.join("#{File.dirname(__FILE__)}", "**", "*.rb")].each do |f|
 end
 
 module ProtectionBase
-  def implement_protection_strategy_in_response(response)
-    implement_xss_response_protection_strategy response
+  def self.included(klass)
+
+  end
+  def implement_protection_strategy_in_request(instance)
+    implement_xss_response_protection_strategy_in_request(instance)
   end
 
-  def implement_xss_response_protection_strategy(response)
-    classify(session[:xss_settings], "XSS").implement_protection_strategy_in_response response
+  def implement_protection_strategy_in_response(instance)
+    implement_xss_response_protection_strategy_in_response instance
+  end
+
+  def implement_xss_response_protection_strategy_in_request(instance)
+    classify(session[:xss_settings], "XSS").implement_protection_strategy_in_request(instance)
+  end
+
+  def implement_xss_response_protection_strategy_in_response(instance)
+    classify(session[:xss_settings], "XSS").implement_protection_strategy_in_response instance
   end
 
   def classify(name, namespace = "")

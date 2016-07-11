@@ -19,6 +19,7 @@ class MyApp < Sinatra::Base
   use Rack::Session::Pool
 
   set :session_secret, '*&(^B234'
+  set :bind, '0.0.0.0'
 
   assets {
     serve '/js',     from: './js'        # Default
@@ -28,12 +29,12 @@ class MyApp < Sinatra::Base
   get '/' do
     session[:state] ||= []
     session[:xss_settings] ||= "no_protection"
-    implement_protection_strategy_in_response response
+    implement_protection_strategy_in_response self
     erb :index
   end
 
   post "/add_feedback" do
-    halt 400, "Usage of <script> tag is not allowed"
+    implement_protection_strategy_in_request self
     session[:state] << {:name => params["name"], :feedback => params["feedback"], :created_at => Time.now}
     flash.next[:message] = "Thanks for the feedback!"
     redirect to("/#Guestbook")
