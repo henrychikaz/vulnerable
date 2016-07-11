@@ -33,6 +33,7 @@ $('#flash').delay(2000).fadeOut('slow');
 
 $("#guestbook_tab").on("click", function() {openTab("Guestbook"); refreshData();});
 $("#feedback_tab").on("click", function() {openTab("Feedback")});
+$("#search_tab").on("click", function() {openTab("Search")});
 $("#settings_tab").on("click", function() {openTab("Settings")});
 
 $("#xss_level").on("change", function() {updateSettings("xss", $(this).val())});

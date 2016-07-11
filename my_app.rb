@@ -40,6 +40,11 @@ class MyApp < Sinatra::Base
     redirect to("/#Guestbook")
   end
 
+  post "/search" do
+    flash[:search] = params["search"]
+    redirect to("/#Search")
+  end
+
   post "/update_settings" do
     if params["type"] == "xss"
       session[:xss_settings] = params["value"]

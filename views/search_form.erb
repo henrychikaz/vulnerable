@@ -1,0 +1,11 @@
+<h2>Search</h2>
+<form id=search_form class="w3-container" method="post" action="/search">
+
+  <input name=search value="<%= CGI.escapeHTML(flash[:search]||"") %>" class="w3-input w3-border w3-round-large" type="text">
+<p/>
+  <button id=search class="w3-btn w3-green">Search</button>
+
+</form>
+<% if flash[:search] %>
+<h3>No results found for :</h3><%= encode_output(flash[:search]) %>
+<% end %>
