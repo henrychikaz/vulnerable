@@ -5,12 +5,14 @@ require 'uri'
 require 'sinatra/assetpack'
 require 'sinatra/flash'
 require 'pp'
-
+require './modules/protection_base'
+require './helpers/my_view_helper'
 
 set :root, File.dirname(__FILE__) # You must set app root
 
 class MyApp < Sinatra::Base
-
+  include ProtectionBase
+  include Helpers::MyViewHelper
   register Sinatra::Flash
   register Sinatra::AssetPack
   enable :sessions
@@ -23,11 +25,10 @@ class MyApp < Sinatra::Base
     serve '/css',     from: './css'        # Default
   }
 
-
   get '/' do
     session[:state] ||= []
-    session[:xss_settings] ||= ""
-    #headers "Content-Security-Policy" => "default-src 'self' http://www.w3schools.com;"
+    session[:xss_settings] ||= "no_protection"
+    implement_protection_strategy_in_response response
     erb :index
   end
 

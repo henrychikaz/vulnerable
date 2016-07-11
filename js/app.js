@@ -31,7 +31,7 @@ if (tabName == "")
 openTab(tabName);
 $('#flash').delay(2000).fadeOut('slow');
 
-$("#guestbook_tab").on("click", function() {openTab("Guestbook")});
+$("#guestbook_tab").on("click", function() {openTab("Guestbook"); refreshData();});
 $("#feedback_tab").on("click", function() {openTab("Feedback")});
 $("#settings_tab").on("click", function() {openTab("Settings")});
 

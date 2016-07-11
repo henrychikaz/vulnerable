@@ -1,14 +1,6 @@
 <h2>Settings</h2>
 <h4>XSS Protection Level</h4>
 <form id=xss_settings_form class="w3-container" method="post" action="/update_settings">
+  <%= select_tag("xss_level", "value", [["no_protection","No Protection"], ["csp", "CSP"]], session[:xss_settings]) %>
   <input name="type" value="xss" type="hidden"/>
-  <select class="w3-select w3-border" id="xss_level" name="value">
-  <option value="" selected>No Protection</option>
-  <option value="script_tag">Disallow Script Tag</option>
-  <option value="encode_all_tags">Encode all Tags</option>
-  <option value="csp">CSP</option>
-</select>
 </form>
-<script>
-  $('#xss_level').val("<%=session[:xss_settings]%>");
-</script>
