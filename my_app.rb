@@ -1,17 +1,17 @@
-require 'sinatra'
+require 'sinatra/base'
 require 'erubis'
 require 'http'
 require 'uri'
 require 'sinatra/assetpack'
 require 'sinatra/flash'
 require 'pp'
-require './modules/protection_base'
+require File.join("#{File.dirname(__FILE__)}", "modules", "protection_base")
 require './helpers/my_view_helper'
 
-set :root, File.dirname(__FILE__) # You must set app root
+#set :root, File.dirname(__FILE__) # You must set app root
 
 class MyApp < Sinatra::Base
-  include ProtectionBase
+  include ::ProtectionBase
   include Helpers::MyViewHelper
   register Sinatra::Flash
   register Sinatra::AssetPack
@@ -33,6 +33,7 @@ class MyApp < Sinatra::Base
   end
 
   post "/add_feedback" do
+    halt 400, "Usage of <script> tag is not allowed"
     session[:state] << {:name => params["name"], :feedback => params["feedback"], :created_at => Time.now}
     flash.next[:message] = "Thanks for the feedback!"
     redirect to("/#Guestbook")
@@ -50,6 +51,6 @@ class MyApp < Sinatra::Base
   session_pool = Rack::Session::Pool.new(
       Sinatra::Application
   )
-  run! session_pool if __FILE__ == $0
+  run! if __FILE__ == $0
 
 end

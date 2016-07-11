@@ -1,6 +1,7 @@
-Dir[File.join(".", "**/*.rb")].each do |f|
+Dir[File.join("#{File.dirname(__FILE__)}", "**", "*.rb")].each do |f|
   require f
 end
+
 module ProtectionBase
   def implement_protection_strategy_in_response(response)
     implement_xss_response_protection_strategy response
