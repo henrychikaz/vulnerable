@@ -5,5 +5,10 @@ module XSS
         headers["Content-Security-Policy"] = "default-src 'self' http://www.w3schools.com;"
       end
     end
+
+    def self.encode_output(record)
+      record
+    end
+
   end
 end

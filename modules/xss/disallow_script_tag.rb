@@ -13,5 +13,9 @@ module XSS
     def self.implement_protection_strategy_in_response(instance)
     end
 
+    def self.encode_output(record)
+      record
+    end
+
   end
 end

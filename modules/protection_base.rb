@@ -14,12 +14,20 @@ module ProtectionBase
     implement_xss_response_protection_strategy_in_response instance
   end
 
+  def encode_output(record)
+    encode_output_for_xss(record)
+  end
+
   def implement_xss_response_protection_strategy_in_request(instance)
     classify(session[:xss_settings], "XSS").implement_protection_strategy_in_request(instance)
   end
 
   def implement_xss_response_protection_strategy_in_response(instance)
     classify(session[:xss_settings], "XSS").implement_protection_strategy_in_response instance
+  end
+
+  def encode_output_for_xss(record)
+    classify(session[:xss_settings], "XSS").encode_output record
   end
 
   def classify(name, namespace = "")

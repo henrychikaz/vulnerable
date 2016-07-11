@@ -3,7 +3,8 @@
 <form id=xss_settings_form class="w3-container" method="post" action="/update_settings">
   <%= select_tag("xss_level", "value", [
       ["no_protection","No Protection"],
-      ["disallow_script_tag", "Disallow Script Tag"],
+      ["disallow_script_tag", "Input Validation(&lt;script&gt; Tag)"],
+      ["encode_output", "Encode Output"],
       ["csp", "CSP"]
   ], session[:xss_settings]) %>
   <input name="type" value="xss" type="hidden"/>
