@@ -1,9 +1,9 @@
 module XSS
-  module DisallowScriptTag
+  module DisallowHtmlTag
 
     def self.implement_protection_strategy_in_request(instance)
       instance.instance_eval do
-        if params["name"].index("<script>") or params["feedback"].index("<script>")
+        if params["name"].index("<") or params["feedback"].index(">")
           flash.next[:error] = "Input contains invalid characters!"
           redirect to("/#Feedback")
         end

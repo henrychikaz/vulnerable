@@ -4,6 +4,7 @@
   <%= select_tag("xss_level", "value", [
       ["no_protection","No Protection"],
       ["disallow_script_tag", "Input Validation (&lt;script&gt; Tag)"],
+      ["disallow_html_tag", "Input Validation (&lt; and &gt;)"],
       ["encode_output", "Encode Output"],
       ["csp", "CSP"]
   ], session[:xss_settings]) %>
