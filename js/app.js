@@ -27,7 +27,7 @@ function updateSettings(settings_type, settings_value) {
 }
 var tabName = window.location.hash.substr(1);
 if (tabName == "")
-    tabName = "Guestbook";
+    tabName = $("#tabName").val();
 openTab(tabName);
 $('#flash').delay(2000).fadeOut('slow');
 

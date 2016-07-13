@@ -18,8 +18,15 @@ class MyApp < Sinatra::Base
   enable :sessions
   use Rack::Session::Pool
 
+  configure do
+    disable :protection
+  end
   set :session_secret, '*&(^B234'
   set :bind, '0.0.0.0'
+
+  before do
+    cache_control :public, :must_revalidate, :no_cache, :no_store
+  end
 
   assets {
     serve '/js',     from: './js'        # Default
@@ -36,13 +43,16 @@ class MyApp < Sinatra::Base
   post "/add_feedback" do
     implement_protection_strategy_in_request self
     session[:state] << {:name => params["name"], :feedback => params["feedback"], :created_at => Time.now}
-    flash.next[:message] = "Thanks for the feedback!"
-    redirect to("/#Guestbook")
+    flash.now[:message] = "Thanks for the feedback!"
+    implement_protection_strategy_in_response self
+    erb :index
   end
 
   get "/search" do
-    flash[:search] = params["search"]
-    redirect to("/#Search")
+    flash.now[:search] = params["search"]
+    flash.now[:tab] = "Search"
+    implement_protection_strategy_in_response self
+    erb :index
   end
 
   post "/update_settings" do
