@@ -14,7 +14,7 @@
 			<li><a id="search_tab" href="#">Search</a></li>
 			<li><a id="settings_tab" href="#">Settings</a></li>
 		</ul>
-
+		<input type="hidden" id="tabName" value="<%= flash[:tab] || 'Guestbook' %>"/>
 		<% if flash[:message] %>
 			<div id=flash class="w3-container w3-green w3-round">
 				<p><%= flash[:message]%></p>

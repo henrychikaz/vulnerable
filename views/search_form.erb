@@ -3,9 +3,8 @@
 
   <input name=search value="<%= CGI.escapeHTML(flash[:search]||"") %>" class="w3-input w3-border w3-round-large" type="text">
 <p/>
-  <button id=search class="w3-btn w3-green">Search</button>
-
 </form>
+<button id=search class="w3-btn w3-green">Search</button>
 <% if flash[:search] %>
 <h3>No results found for :</h3><%= encode_output(flash[:search]) %>
 <% end %>
