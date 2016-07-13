@@ -18,6 +18,10 @@ $("#add_feedback").on("click", function() {
     $("#feedback_form").submit();
 });
 
+$("#search").on("click", function() {
+    $("#search_form").submit();
+});
+
 function refreshData() {
     window.location.href="/";
 }

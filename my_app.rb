@@ -18,9 +18,9 @@ class MyApp < Sinatra::Base
   enable :sessions
   use Rack::Session::Pool
 
-  configure do
-    disable :protection
-  end
+  # configure do
+  #   disable :protection
+  # end
   set :session_secret, '*&(^B234'
   set :bind, '0.0.0.0'
 
@@ -44,8 +44,7 @@ class MyApp < Sinatra::Base
     implement_protection_strategy_in_request self
     session[:state] << {:name => params["name"], :feedback => params["feedback"], :created_at => Time.now}
     flash.now[:message] = "Thanks for the feedback!"
-    implement_protection_strategy_in_response self
-    erb :index
+    redirect to("/#Guestbook")
   end
 
   get "/search" do
