@@ -40,7 +40,7 @@ class MyApp < Sinatra::Base
     redirect to("/#Guestbook")
   end
 
-  post "/search" do
+  get "/search" do
     flash[:search] = params["search"]
     redirect to("/#Search")
   end
