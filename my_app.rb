@@ -48,6 +48,7 @@ class MyApp < Sinatra::Base
   end
 
   get "/search" do
+    implement_protection_strategy_in_request self
     flash.now[:search] = params["search"]
     flash.now[:tab] = "Search"
     implement_protection_strategy_in_response self
